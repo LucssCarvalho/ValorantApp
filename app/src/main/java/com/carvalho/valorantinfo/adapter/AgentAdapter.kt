@@ -32,29 +32,15 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.AgentViewHolder>() {
         holder.agentName.text = agent.displayName
 
         Glide.with(holder.itemView.context)
-            .load(agent.displayIcon)
+            .load(agent.fullPortrait)
             .into(holder.agentImage)
-
-        holder.itemView.setOnClickListener {
-            val detailFragment = AgentDetailFragment.newInstance(agent)
-            val activity = holder.itemView.context as AppCompatActivity
-
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, detailFragment)
-                .addToBackStack(null)
-                .commit()
-
-            activity.findViewById<FrameLayout>(R.id.fragment_container).visibility = View.VISIBLE
-            activity.findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
-        }
-
     }
 
     override fun getItemCount(): Int = agentList.size
 
     fun updateAgents(newAgents: List<Agent>) {
         agentList.clear()
-        agentList.addAll(newAgents)
+        agentList.addAll(newAgents.filter { it.isPlayableCharacter }.sortedBy { it.displayName })
         notifyDataSetChanged()
     }
 }

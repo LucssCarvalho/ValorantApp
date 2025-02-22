@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.carvalho.valorantinfo.adapter.AgentAdapter
 import com.carvalho.valorantinfo.ui.AgentViewModel
 import kotlinx.coroutines.launch
-
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: AgentViewModel by viewModels()
@@ -20,10 +20,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        val numberOfColumns = 2
-        recyclerView.layoutManager = GridLayoutManager(this, numberOfColumns)
+        recyclerView = findViewById(R.id.recyclerViewCarousel)
+        recyclerView.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.HORIZONTAL,
+            false)
         recyclerView.adapter = agentAdapter
+
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerView)
 
         viewModel.fetchAgents()
 

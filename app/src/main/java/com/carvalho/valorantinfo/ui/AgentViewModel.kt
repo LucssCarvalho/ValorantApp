@@ -26,5 +26,4 @@ class AgentViewModel : ViewModel() {
             }
         }
     }
-
 }

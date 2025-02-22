@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.carvalho.valorantinfo.adapter.AgentAdapter
 import com.carvalho.valorantinfo.ui.AgentViewModel
 import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: AgentViewModel by viewModels()
@@ -20,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val numberOfColumns = 2
+        recyclerView.layoutManager = GridLayoutManager(this, numberOfColumns)
         recyclerView.adapter = agentAdapter
 
         viewModel.fetchAgents()

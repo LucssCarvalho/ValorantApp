@@ -1,14 +1,17 @@
 package com.carvalho.valorantinfo.adapter
 
+import Agent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.carvalho.valorantinfo.AgentDetailFragment
 import com.carvalho.valorantinfo.R
-import com.carvalho.valorantinfo.model.Agent
 
 class AgentAdapter : RecyclerView.Adapter<AgentAdapter.AgentViewHolder>() {
     private val agentList = mutableListOf<Agent>()
@@ -31,6 +34,20 @@ class AgentAdapter : RecyclerView.Adapter<AgentAdapter.AgentViewHolder>() {
         Glide.with(holder.itemView.context)
             .load(agent.displayIcon)
             .into(holder.agentImage)
+
+        holder.itemView.setOnClickListener {
+            val detailFragment = AgentDetailFragment.newInstance(agent)
+            val activity = holder.itemView.context as AppCompatActivity
+
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, detailFragment)
+                .addToBackStack(null)
+                .commit()
+
+            activity.findViewById<FrameLayout>(R.id.fragment_container).visibility = View.VISIBLE
+            activity.findViewById<RecyclerView>(R.id.recyclerView).visibility = View.GONE
+        }
+
     }
 
     override fun getItemCount(): Int = agentList.size

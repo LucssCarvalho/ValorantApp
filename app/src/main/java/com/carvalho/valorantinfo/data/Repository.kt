@@ -1,7 +1,7 @@
 package com.carvalho.valorantinfo.data
 
+import Agent
 import android.util.Log
-import com.carvalho.valorantinfo.model.Agent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

@@ -1,9 +1,9 @@
 package com.carvalho.valorantinfo.ui
 
+import Agent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carvalho.valorantinfo.data.Repository
-import com.carvalho.valorantinfo.model.Agent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -2,30 +2,26 @@ package com.carvalho.valorantinfo.adapter
 
 import Ability
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.carvalho.valorantinfo.R
+import com.carvalho.valorantinfo.databinding.ItemAbilityBinding
 
 class AbilityAdapter(private val abilities: List<Ability>) :
     RecyclerView.Adapter<AbilityAdapter.AbilityViewHolder>() {
 
-    class AbilityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val abilityIcon: ImageView = view.findViewById(R.id.ability_icon)
-    }
+    class AbilityViewHolder(val binding: ItemAbilityBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AbilityViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_ability, parent, false)
-        return AbilityViewHolder(view)
+        val binding = ItemAbilityBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return AbilityViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AbilityViewHolder, position: Int) {
         val ability = abilities[position]
-        Glide.with(holder.itemView.context)
+        Glide.with(holder.binding.root.context)
             .load(ability.displayIcon)
-            .into(holder.abilityIcon)
+            .into(holder.binding.abilityIcon)
     }
 
     override fun getItemCount(): Int = abilities.size

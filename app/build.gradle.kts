@@ -8,6 +8,10 @@ android {
     namespace = "com.carvalho.valorantinfo"
     compileSdk = 35
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.carvalho.valorantinfo"
         minSdk = 21
